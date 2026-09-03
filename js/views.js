@@ -68,10 +68,6 @@ export function renderHomeView() {
             <p class="text-sm text-white/80 mt-1">Quality products at your doorstep</p>
             <a href="#/categories" class="inline-block bg-white text-brandOrange text-sm font-bold px-5 py-2.5 rounded-xl shadow mt-4 btn-press">Shop Now</a>
           </div>
-          <button type="button" data-action="install-app" class="hidden w-full bg-brandOrange text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 btn-press">
-            <i class="fa-solid fa-download"></i>
-            Install ZMart App
-          </button>
           <i class="fa-solid fa-basket-shopping text-8xl lg:text-9xl text-white/15 absolute -right-4 -bottom-4"></i>
         </section>
 

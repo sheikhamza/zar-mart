@@ -90,15 +90,16 @@ function setupPWAInstall() {
 }
 
 function updateInstallButton() {
-  const buttons = document.querySelectorAll('[data-action="install-app"]');
+  const buttons = document.querySelectorAll(
+    '[data-action="install-app"]'
+  );
+
+  const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
 
   buttons.forEach((button) => {
-    // Agar already standalone app hai
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      window.navigator.standalone === true;
-
-    if (isStandalone || !deferredInstallPrompt) {
+    if (isStandalone) {
       button.classList.add("hidden");
     } else {
       button.classList.remove("hidden");
@@ -107,22 +108,41 @@ function updateInstallButton() {
 }
 
 async function installPWA() {
-  if (!deferredInstallPrompt) {
-    showToast("Install option is not available right now.");
+  // Android/Chrome/Edge etc.
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+
+    const { outcome } = await deferredInstallPrompt.userChoice;
+
+    console.log("Install result:", outcome);
+
+    deferredInstallPrompt = null;
+    updateInstallButton();
+
     return;
   }
 
-  // Native browser install popup
-  deferredInstallPrompt.prompt();
+  // iPhone/iPad
+  const isIOS =
+    /iphone|ipad|ipod/i.test(navigator.userAgent);
 
-  const { outcome } = await deferredInstallPrompt.userChoice;
+  const isStandalone =
+    window.navigator.standalone === true ||
+    window.matchMedia("(display-mode: standalone)").matches;
 
-  console.log("PWA install result:", outcome);
+  if (isStandalone) {
+    showToast("ZMart is already installed!");
+    return;
+  }
 
-  // Prompt sirf ek baar use hota hai
-  deferredInstallPrompt = null;
+  if (isIOS) {
+    showToast("Tap Share → Add to Home Screen to install ZMart");
+    return;
+  }
 
-  updateInstallButton();
+  showToast(
+    "Chrome menu ⋮ → Install ZMart App / Add to Home screen"
+  );
 }
 
 function renderShell(route) {
