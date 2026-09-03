@@ -61,6 +61,70 @@ const appNav = () => document.getElementById("app-nav");
 let pendingOrder = null;
 let detailQty = 1;
 
+// PWA install prompt
+let deferredInstallPrompt = null;
+
+function setupPWAInstall() {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    // Browser ka default mini-infobar prevent karo
+    event.preventDefault();
+
+    // Prompt ko save karo
+    deferredInstallPrompt = event;
+
+    console.log("PWA install available");
+
+    // Agar button currently DOM mein hai to show karo
+    updateInstallButton();
+  });
+
+  window.addEventListener("appinstalled", () => {
+    console.log("ZMart installed successfully");
+
+    deferredInstallPrompt = null;
+
+    updateInstallButton();
+  });
+
+  updateInstallButton();
+}
+
+function updateInstallButton() {
+  const buttons = document.querySelectorAll('[data-action="install-app"]');
+
+  buttons.forEach((button) => {
+    // Agar already standalone app hai
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+
+    if (isStandalone || !deferredInstallPrompt) {
+      button.classList.add("hidden");
+    } else {
+      button.classList.remove("hidden");
+    }
+  });
+}
+
+async function installPWA() {
+  if (!deferredInstallPrompt) {
+    showToast("Install option is not available right now.");
+    return;
+  }
+
+  // Native browser install popup
+  deferredInstallPrompt.prompt();
+
+  const { outcome } = await deferredInstallPrompt.userChoice;
+
+  console.log("PWA install result:", outcome);
+
+  // Prompt sirf ek baar use hota hai
+  deferredInstallPrompt = null;
+
+  updateInstallButton();
+}
+
 function renderShell(route) {
   appHeader().innerHTML = renderHeader(route);
   appNav().innerHTML = renderBottomNav(getActiveTab(route));
@@ -181,6 +245,10 @@ function handleAppClick(e) {
   const id = target.dataset.id ? Number(target.dataset.id) : null;
 
   switch (action) {
+    case "install-app":
+      e.preventDefault();
+      installPWA();
+      break;
     case "go-back":
       e.preventDefault();
       goBack();
@@ -640,15 +708,26 @@ function init() {
   initRouter((route) => {
     renderShell(route);
     updateCartBadges();
+
+    // Route change ke baad install button check
+    updateInstallButton();
   });
 
   document.addEventListener("click", handleAppClick);
+
   document.getElementById("app").addEventListener("input", handleSearchInput);
+
   document.getElementById("app").addEventListener("submit", (e) => {
-    if (e.target.id === "checkout-form") handleCheckoutSubmit(e);
+    if (e.target.id === "checkout-form") {
+      handleCheckoutSubmit(e);
+    }
   });
 
   setupOfflineIndicator();
+
+  // PWA install setup
+  setupPWAInstall();
+
   registerServiceWorker();
 }
 
