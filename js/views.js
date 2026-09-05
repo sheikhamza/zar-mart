@@ -77,7 +77,7 @@ export function renderHomeView() {
             ${categories.map((c) => `
               <a href="#/category/${c.id}" class="bg-white p-3 rounded-xl border border-slate-100 flex flex-col items-center min-w-[72px] shrink-0 shadow-sm hover:shadow-md transition-shadow btn-press">
                 <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-brandOrange mb-1.5">
-                  <i class="fa-solid ${c.icon}"></i>
+                  <img src="${c.img}" class="h-10 w-10 lg:w-12 lg:h-12 rounded-full"></img>
                 </div>
                 <span class="text-[10px] font-semibold text-slate-700 text-center line-clamp-2">${c.name}</span>
               </a>

@@ -222,9 +222,7 @@ export function renderProductCard(product, options = {}) {
 export function renderCategoryCard(category) {
   return `
     <a href="#/category/${category.id}" class="bg-white p-3 lg:p-4 rounded-2xl border border-slate-100 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow space-y-2 btn-press min-h-[90px]" aria-label="${category.name} category">
-      <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-orange-50 text-brandOrange flex items-center justify-center text-lg">
-        <i class="fa-solid ${category.icon}"></i>
-      </div>
+      <img src="${category.img}" class="w-12 h-12 rounded-full"></img>
       <span class="text-xs font-bold text-slate-700 text-center line-clamp-2">${category.name}</span>
     </a>
   `;
@@ -276,12 +274,13 @@ export function renderHeader(activeRoute) {
 
   return `
     <header class="sticky top-0 z-40 bg-white border-b border-slate-100 shadow-sm">
-      <div class="app-container px-4 py-3">
+      <div class="app-container px-4 lg:py-3">
         <!-- Mobile header -->
         <div class="flex lg:hidden items-center justify-between gap-3">
           <a href="#/home" class="flex items-center gap-2 shrink-0" aria-label="ZMart Home">
-            <div class="w-8 h-8 rounded-lg bg-brandOrange flex items-center justify-center text-white font-bold text-sm">Z</div>
-            <span class="font-bold text-slate-800">${ZMART_CONFIG.storeName}</span>
+            <div class="flex items-center justify-center">
+            <img src="../assets/images/logo.png" class="w-14 h-14 rounded-full"></img>
+            </div>
           </a>
           <button type="button" data-action="open-location" class="flex-1 min-w-0 text-left" aria-label="Delivery location">
             <div class="text-[10px] uppercase font-bold text-slate-400">Deliver To</div>

@@ -1,9 +1,14 @@
 export const categories = [
-  { id: "1", name: "Aata & Grains", icon: "fa-cheese" },
-  { id: "2", name: "Daalain & Pulses", icon: "fa-bread-slice" },
-  { id: "3", name: "Masalay & Namak", icon: "fa-mug-hot" },
-  { id: "4", name: "Cooking Oil & Ghee", icon: "fa-cookie-bite" },
-  { id: "5", name: "Breakfast", icon: "fa-egg" },
+  { id: "1", name: "General Store", img: "../assets/images/category/general-store.webp" },
+  { id: "2", name: "Kiryana", img: "../assets/images/category/kiryana.webp" },
+  { id: "3", name: "Masalay & Spices", img: "../assets/images/category/masalay.webp" },
+  { id: "4", name: "Dairy", img: "../assets/images/category/dairy.jpg" },
+  { id: "5", name: "Drinks", img: "../assets/images/category/drinks.jpg" },
+  { id: "6", name: "Dry Fruit", img: "../assets/images/category/dry-fruit.jpg" },
+  { id: "7", name: "Snaks", img: "../assets/images/category/snacks.jpg" },
+  { id: "8", name: "chocolate ", img: "../assets/images/category/chocolate.jpg" },
+  { id: "9", name: "Biscuits", img: "../assets/images/category/buscuit.jpg" },
+  { id: "10", name: "Munching", img: "../assets/images/category/munching.jpg" },
 ];
 
 const img = (id) =>
@@ -23,7 +28,7 @@ export const products = [
   { id: 10, name: "Corn Flour", category: "1", price: 180, oldPrice: 200, discount: 10, unit: "1 KG", image: img("1563636619-e9143da7973b"), description: "Fresh and pure milk. Good for health and strong bones.", stock: true, popular: true, featured: true, tags: ["fresh", "daily", "milk"] },
   // Daalain & Pulses
   { id: 11, name: "Masoor Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: img("1701064865147-48dcd4d63015"), description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },
-  { id: 12, name: "Moong Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: img("1702041357314-db5826c96f04"), description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },
+  { id: 12, name: "Moong Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: './assets/images/mong.png', description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },
   { id: 13, name: "Chana Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: img("1612869538502-b5baa439abd7"), description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },
   { id: 14, name: "Mash Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: img("1705146640334-1277c28ddd1a"), description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },
   { id: 15, name: "Arhar/Toor Daal", category: "2", price: 120, oldPrice: 140, discount: 14, unit: "Loaf", image: img("1509440159596-0249088772ff"), description: "Soft and fresh white bread baked daily.", stock: true, popular: true, featured: true, tags: ["bread", "2", "fresh"] },

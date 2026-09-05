@@ -1,4 +1,4 @@
-const CACHE_NAME = "zmart-v2";
+const CACHE_NAME = "zmart-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
